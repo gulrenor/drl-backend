@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app="website">
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles/backend.css">
+  </head>
+
+  <body ng-controller="ProjectsCtrl">
+    <header>
+      <form>
+        <label>Name</label><input type="text" ng-model="query.Client">
+        <div id="advanced-search">
+          <label>Oversized</label><input type="checkbox" ng-model="query.Files.Oversized" ng-true-value="1" ng-false-value="0"/>
+          <label>On-The-Boards</label><input type="checkbox" ng-model="query.Files.OnTheBoards" ng-true-value="1" ng-false-value="0"/>
+        </div>
+      </form>
+    </header>
+
+    <section class="project-cards" ng-repeat="project in projects | filter: query">
+      <h1 ng-bind="project.Client"></h1>
+      <p>
+        <span ng-bind="project.Address"></span>
+        <span ng-bind="project.City"></span>
+        <span ng-bind="project.State"></span>
+      </p>
+
+      <div class="image-gallery">
+        <a class="image-gallery-image" ng-repeat="image in project.Files" href="{{appendExtension(image.Filename)}}"><img ng-src="{{appendExtension(image.Filename)}}"/></a>
+      </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.min.js"></script>
+    <script src="scripts/projects.js"></script>
+  </body>
+</html>

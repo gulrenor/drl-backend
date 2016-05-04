@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Montserrat);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat";
+  color: #464144; }
+
+html {
+  background-color: #b4b4b4; }
+
+body {
+  width: 60vw;
+  margin: 0 auto;
+  padding: 5rem;
+  font-size: 16px;
+  background-color: white; }
+
+h1, h2, h3, h4, p, li, span, input, button, pre {
+  line-height: 2rem; }
+
+h1 {
+  text-transform: uppercase; }
+
+form label {
+  margin: 0 0.5rem; }
+
+input[type=checkbox] {
+  width: 1rem;
+  height: 1rem;
+  line-height: 2rem; }
+
+.image-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%; }
+  .image-gallery a {
+    width: 30%;
+    display: block; }
+    .image-gallery a img {
+      width: 100%;
+      border: 0.125rem solid #646464; }
+
+.project-cards {
+  padding: 1rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem 0 rgba(100, 100, 100, 0.5);
+  border: 0.1rem solid #8b2732;
+  margin: 2rem 0; }
+
+/*# sourceMappingURL=backend.css.map */
