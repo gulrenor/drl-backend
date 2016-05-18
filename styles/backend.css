@@ -2,6 +2,7 @@
 * {
   margin: 0;
   padding: 0;
+  border: 0;
   box-sizing: border-box;
   font-family: "Montserrat";
   color: #464144; }
@@ -16,7 +17,7 @@ body {
   font-size: 16px;
   background-color: white; }
 
-h1, h2, h3, h4, p, li, span, input, button, pre {
+h1, h2, h3, h4, p, li, span, input, button, pre, select, button {
   line-height: 2rem; }
 
 h1 {
@@ -25,10 +26,29 @@ h1 {
 form label {
   margin: 0 0.5rem; }
 
+input, select, button {
+  padding: 0.25rem;
+  border: 0.1rem solid #646464;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out; }
+  input:hover, select:hover, button:hover {
+    background-color: #8b2732;
+    color: white; }
+
+input[type=text] {
+  width: 20rem; }
+
 input[type=checkbox] {
   width: 1rem;
-  height: 1rem;
-  line-height: 2rem; }
+  height: 1rem; }
+
+.project-cards, #advanced-search-pane {
+  padding: 1rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem 0 rgba(100, 100, 100, 0.5);
+  border: 0.1rem solid #8b2732;
+  margin: 2rem 0; }
+
+#advanced-search-pane {
+  display: none; }
 
 .image-gallery {
   display: flex;
@@ -36,17 +56,22 @@ input[type=checkbox] {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%; }
-  .image-gallery a {
-    width: 30%;
-    display: block; }
-    .image-gallery a img {
-      width: 100%;
-      border: 0.125rem solid #646464; }
 
-.project-cards {
-  padding: 1rem;
-  box-shadow: 0.25rem 0.25rem 0.5rem 0 rgba(100, 100, 100, 0.5);
-  border: 0.1rem solid #8b2732;
-  margin: 2rem 0; }
+.image-gallery-image {
+  position: relative;
+  border: 0.125rem solid #646464;
+  width: 30%;
+  margin-bottom: 1rem; }
+  .image-gallery-image img {
+    width: 100%;
+    height: 100%; }
+
+.image-edit-overlay {
+  position: absolute;
+  background-color: rgba(139, 39, 50, 0.7);
+  width: 100%;
+  height: 100%; }
+  .image-edit-overlay * {
+    color: white; }
 
 /*# sourceMappingURL=backend.css.map */

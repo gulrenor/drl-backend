@@ -40,6 +40,7 @@ modules/
 
 
 php/*.config.php
+php/*.query.php
 auth/
 puphpet/
 admin/

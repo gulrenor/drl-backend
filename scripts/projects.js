@@ -1,7 +1,8 @@
 // projects.js
 
-var app = angular.module('website', []);
+var app = angular.module('website', ['angular.filter']);
 var transact = "php/json-dump.php";
+var statesQuery = 'php/states.php';
 
 app.controller('ProjectsCtrl', ['$scope', '$http', function($scope, $http) {
   $http.get(transact)
@@ -9,6 +10,13 @@ app.controller('ProjectsCtrl', ['$scope', '$http', function($scope, $http) {
       $scope.projects = data;
       console.log(data);
     });
+
+/*
+  $http.get(statesQuery)
+    .success(function(data) {
+      $scope.statesList = data;
+    })
+*/
 
   // Formats the image's URL
   $scope.appendExtension = function (filename) {

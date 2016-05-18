@@ -7,16 +7,41 @@
 
   <body ng-controller="ProjectsCtrl">
     <header>
+      <h1>Project List</h1>
       <form>
-        <label>Name</label><input type="text" ng-model="query.Client">
-        <div id="advanced-search">
-          <label>Oversized</label><input type="checkbox" ng-model="query.Files.Oversized" ng-true-value="1" ng-false-value="0"/>
-          <label>On-The-Boards</label><input type="checkbox" ng-model="query.Files.OnTheBoards" ng-true-value="1" ng-false-value="0"/>
+
+        <input type="text" placeholder="Enter Search Terms" ng-model="query.$">
+
+        <a href="#" id="advanced-search">Advanced Search</a>
+        <p>
+          There are <span ng-bind="filteredResults.length">...</span> results.
+        </p>
+
+        <div id="advanced-search-pane">
+
+          <input type="text" placeholder="City" ng-model="query.City"/>
+
+          <label>State</label>
+          <select name="State" ng-model="query.State">
+            <option ng-repeat="state in projects | unique: 'State' " value="{{state.State}}">
+              {{state.State}}
+            </option>
+          </select>
+
+          <label>Oversized</label>
+          <input type="checkbox" ng-model="query.Files.Oversized" ng-true-value="1" ng-false-value="0"/>
+
+          <label>On-The-Boards</label>
+          <input type="checkbox" ng-model="query.Files.OnTheBoards" ng-true-value="1" ng-false-value="0"/>
+
+          <label>Hide Images</label>
+          <input id="hide-images" type="checkbox"/>
+
         </div>
       </form>
     </header>
 
-    <section class="project-cards" ng-repeat="project in projects | filter: query">
+    <section class="project-cards" ng-repeat="project in filteredResults = (projects | filter: query)">
       <h1 ng-bind="project.Client"></h1>
       <p>
         <span ng-bind="project.Address"></span>
@@ -25,13 +50,33 @@
       </p>
 
       <div class="image-gallery">
-        <a class="image-gallery-image" ng-repeat="image in project.Files" href="{{appendExtension(image.Filename)}}"><img ng-src="{{appendExtension(image.Filename)}}"/></a>
+        <div class="image-gallery-image" ng-repeat="image in project.Files" href="{{appendExtension(image.Filename)}}" ng-mouseover="imageEditOverlay=true" ng-mouseleave="imageEditOverlay=!imageEditOverlay">
+          <form class="image-edit-overlay" ng-show="imageEditOverlay">
+
+            <p>
+              <label>Oversized</label><input type="checkbox" ng-checked="{{image.Oversized}}"/>
+            </p>
+            <p>
+              <label>On-The-Boards</label><input type="checkbox" ng-checked="{{image.OnTheBoards}}"/>
+            </p>
+            <p>
+              <a ng-href="{{appendExtension(image.Filename)}}">View</a>
+            </p>
+          </form>
+          <img ng-src="{{appendExtension(image.Filename)}}"/>
+        </div>
       </div>
+      <form class="edit">
+        <button class="button-edit">Edit</button>
+      </form>
     </section>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.min.js"></script>
-    <script src="scripts/projects.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-animate.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/ui.js"></script>
+    <script type="text/javascript" src="scripts/projects.js"></script>
   </body>
 </html>

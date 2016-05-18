@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Montserrat)
 
 $nes-magenta: rgb(139,39,50)
+$nes-magenta-overlay: rgba(139,39,50,0.7)
 $drl-font: 'Montserrat'
 
 @mixin drl-styling
@@ -10,6 +11,7 @@ $drl-font: 'Montserrat'
 *
   margin: 0
   padding: 0
+  border: 0
   box-sizing: border-box
   @include drl-styling
 
@@ -23,7 +25,7 @@ body
   font-size: 16px
   background-color: white
 
-h1, h2, h3, h4, p, li, span, input, button, pre
+h1, h2, h3, h4, p, li, span, input, button, pre, select, button
   line-height: 2rem
 
 h1
@@ -33,10 +35,29 @@ form
   label
     margin: 0 0.5rem
 
+input, select, button
+  padding: 0.25rem
+  border: 0.1rem solid rgb(100,100,100)
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out
+  &:hover
+    background-color: $nes-magenta
+    color: white
+
+input[type=text]
+  width: 20rem
+
 input[type=checkbox]
   width: 1rem
   height: 1rem
-  line-height: 2rem
+
+.project-cards, #advanced-search-pane
+  padding: 1rem
+  box-shadow: 0.25rem 0.25rem 0.5rem 0 rgba(100,100,100,0.5)
+  border: 0.1rem solid $nes-magenta
+  margin: 2rem 0
+
+#advanced-search-pane
+  display: none
 
 .image-gallery
   display: flex
@@ -44,15 +65,21 @@ input[type=checkbox]
   flex-wrap: wrap
   justify-content: space-between
   width: 100%
-  a
-    width: 30%
-    display: block
-    img
-      width: 100%
-      border: 0.125rem solid rgb(100,100,100)
 
-.project-cards
-  padding: 1rem
-  box-shadow: 0.25rem 0.25rem 0.5rem 0 rgba(100,100,100,0.5)
-  border: 0.1rem solid $nes-magenta
-  margin: 2rem 0
+.image-gallery-image
+  position: relative
+  border: 0.125rem solid rgb(100,100,100)
+  width: 30%
+  margin-bottom: 1rem
+  img
+    width: 100%
+    height: 100%
+    object-fit:cover
+
+.image-edit-overlay
+  position: absolute
+  background-color: $nes-magenta-overlay
+  width: 100%
+  height: 100%
+  & *
+    color: white
